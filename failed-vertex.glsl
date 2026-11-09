@@ -1,0 +1,10 @@
+#version 450
+layout(set=0,binding=0) uniform Globals {mat4 uVP;vec4 uEye,uEnv,uTint,uLight,uRes,uSettings;};
+
+layout(location=0) in vec3 aPos;layout(location=1) in vec3 aNormal;layout(location=2) in vec4 aColor;layout(location=3) in vec4 aData;
+layout(set=0,binding=1) uniform sampler2D uBodies;
+layout(set=0,binding=2) uniform sampler2D uWave;layout(location=0) out vec3 vWorld;
+layout(location=1) out vec3 vNormal;
+layout(location=2) out vec3 vLocal;out vec4 vColor,vData;
+vec4 wave(vec2 p){ivec2 dims=textureSize(uWave,0);vec2 f=clamp((p+2.6)/5.2,vec2(0),vec2(.9999))*vec2(dims-1);ivec2 q=ivec2(f);vec2 a=fract(f);return mix(mix(texelFetch(uWave,q,0),texelFetch(uWave,min(q+ivec2(1,0),dims-1),0),a.x),mix(texelFetch(uWave,min(q+ivec2(0,1),dims-1),0),texelFetch(uWave,min(q+ivec2(1,1),dims-1),0),a.x),a.y);}
+void main(){vec3 p=aPos,n=aNormal;int id=int(aData.z+.1);float mat=aData.x,anim=aData.y;if(anim==1.)p.z+=sin(uEnv.x*13.+float(id)*1.7)*max(0.,-p.x-.045)*.45;if(anim==2.){p.x+=sin(uEnv.x*1.1+p.z*3.)*.006;p.z+=cos(uEnv.x*.85+p.x*2.)*.005;}if(anim==3.){float a=uEnv.x*65.;vec2 q=vec2(p.y-.07,p.z-aData.w);p.y=.07+q.x*cos(a)-q.y*sin(a);p.z=aData.w+q.x*sin(a)+q.y*cos(a);}if(anim==4.)p.y+=sin(uEnv.x*3.2+abs(p.z)*9.+float(id))*abs(p.z)*.27;if(mat==1.){p.y=uEnv.y+wave(p.xz).r+(sin(p.x*3.8+uEnv.x*.8)+sin(p.z*4.4-uEnv.x*.65))*.003;float e=.03;float dx=wave(p.xz+vec2(e,0)).r-wave(p.xz-vec2(e,0)).r;float dz=wave(p.xz+vec2(0,e)).r-wave(p.xz-vec2(0,e)).r;n=normalize(vec3(-dx/(2.*e),1.,-dz/(2.*e)));}if(mat==2.&&p.y>1.2)p.y=uEnv.y+wave(p.xz).r;mat4 m=mat4(texelFetch(uBodies,ivec2(0,id),0),texelFetch(uBodies,ivec2(1,id),0),texelFetch(uBodies,ivec2(2,id),0),texelFetch(uBodies,ivec2(3,id),0));vWorld=(m*vec4(p,1)).xyz;vNormal=normalize((m*vec4(n,0)).xyz);vLocal=aPos;vColor=aColor;vData=aData;gl_Position=uVP*vec4(vWorld,1);}

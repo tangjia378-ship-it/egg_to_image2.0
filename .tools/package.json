@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@webgpu/glslang": "^0.0.15",
+    "webgpu": "^0.6.2"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "viewport": 390,
+  "buildMS": 761.56,
+  "htmlBytes": 76596,
+  "checks": [
+    {
+      "name": "No external resources",
+      "pass": true,
+      "detail": "No network APIs or external resource elements"
+    },
+    {
+      "name": "Mesh buffers and object transforms are finite",
+      "pass": true,
+      "detail": {
+        "triangles": 60557,
+        "drawCalls": 3,
+        "bytes": 10173576
+      }
+    },
+    {
+      "name": "Waves propagate, stay finite, and decay",
+      "pass": true,
+      "detail": {
+        "before": 0.03116362161848535,
+        "middle": 0.00030160060763133773,
+        "after": 0.000006190192945408011
+      }
+    },
+    {
+      "name": "Fish stay in water during feeding, tides, and splashes",
+      "pass": true,
+      "detail": {
+        "fish": 42,
+        "eaten": 16
+      }
+    },
+    {
+      "name": "Food attracts fish and is consumed",
+      "pass": true,
+      "detail": {
+        "eaten": 16,
+        "remaining": 0
+      }
+    },
+    {
+      "name": "One complete plane loop climbs and lands",
+      "pass": true,
+      "detail": {
+        "phase": "taxi out",
+        "position": [
+          -1.6767321599999563,
+          1.4997868874598754,
+          0.8289945600001255
+        ],
+        "pitch": 0.0001369095740161429,
+        "roll": 0.00001321775598218248,
+        "onWater": true,
+        "maxAltitude": 3.2399999999999998,
+        "touchdowns": 1,
+        "departures": 2
+      }
+    },
+    {
+      "name": "Floating plane follows four surface samples",
+      "pass": true,
+      "detail": {
+        "maxWaterOffset": 0.013687892900173138
+      }
+    },
+    {
+      "name": "Touchdown makes foam and waves",
+      "pass": true,
+      "detail": {
+        "foamPeak": 0.9221693873405457,
+        "waveEnergy": 0.22094909356422443
+      }
+    },
+    {
+      "name": "A finger scatters a school",
+      "pass": true,
+      "detail": {
+        "beforeVelocity": [
+          0.1594777161628008,
+          0.0010376372933387779
+        ],
+        "afterVelocity": [
+          -0.10302228383719927,
+          0.0010376372933387779
+        ]
+      }
+    },
+    {
+      "name": "Rings settle flat and remain on the surface",
+      "pass": true,
+      "detail": [
+        {
+          "height": 1.3269938223768132,
+          "flat": true,
+          "surface": 1.3269940315254256,
+          "held": false
+        }
+      ]
+    },
+    {
+      "name": "Tilt sloshes and returns to rest",
+      "pass": true,
+      "detail": {
+        "tilt": [
+          3.905072846825854e-18,
+          -2.6033818978838993e-18
+        ],
+        "energy": 0.007860034769302518
+      }
+    },
+    {
+      "name": "Pause freezes physics and the plane",
+      "pass": true
+    },
+    {
+      "name": "Water simulation performance",
+      "pass": true,
+      "detail": {
+        "resolution": 112,
+        "meanMS": 1.181267222222242,
+        "p95MS": 1.4131000000015774
+      }
+    }
+  ],
+  "passed": 13,
+  "total": 13
+}
